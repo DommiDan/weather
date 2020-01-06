@@ -1,26 +1,29 @@
-$(document).ready(function() {
+$(document).ready(function(){
+      
+    $("#getForcast").click(function(){
+              
+              var city = $("#city").val();
+              var key  = '32bfd16c31d1937bf0996fcd67fb43dd';
+          
+          $.ajax({
+            url:'http://api.openweathermap.org/data/2.5/weather',
+            dataType:'json',
+            type:'GET',
+            data:{q:city, appid: key, units: 'imperial'},
 
-    $('#getForcast').click(function() {
-        
-        var city = $("#city").val();
+            success: function(data){
+              var weatherforcast = '';
+              $.each(data.weather, function(index, val){
 
-        if(city = ''){
+                weatherforcast = '<p><b>' + data.name + "</b><img src="+ data.weather.icon + ".png></p> Temperature: "+ data.main.temp + '&deg;F ' + 
+                ' | ' + val.main + ", " + val.description + " | Humidity: " + data.main.humidity + " | WindSpeed: " + data.wind.speed + " % "
 
-            $.ajax({
+              });
+            
+             $("#showForcast").html(weatherforcast);
+            }
 
-                url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=imperial" 
-                + "&appid=b6907d289e10d714a6e88b30761fae22",
-                type: "GET",
-                dataType: "JSONP",
-                success: function(data) {
-                     console.log (data);
-                }
+          })
 
-            });
-
-        }else {
-            $("#error").html('can not be empty');
-        }
     });
-
   });
