@@ -16,7 +16,7 @@ $(document).ready(function(){
               $.each(data.weather, function(index, val){
 
                 weatherforcast = '<p><b>' + data.name + "</b><img src="+ data.weather.icon + ".png></p> Temperature: "+ data.main.temp + '&deg;F ' + 
-                ' | ' + val.main + ", " + val.description + " | Humidity: " + data.main.humidity + " | WindSpeed: " + data.wind.speed + " % "
+                ' | ' + val.main + ", " + val.description + " | Humidity: " + data.main.humidity + "% | WindSpeed: " + data.wind.speed + " % "
 
               });
             
